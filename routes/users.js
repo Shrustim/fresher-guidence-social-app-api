@@ -13,8 +13,9 @@ router.get('/', async(req, res) => {
 router.get('/:id', async(req, res) => {
    const { id } = req.params;
    var output = {};
-   const querySql = 'SELECT * FROM users WHERE id = "'+id+'"';
+   const querySql = 'SELECT u.*,c.collegeName FROM users u LEFT OUTER JOIN colleges c  ON u.collageId=c.id  where u.id =  "'+id+'"';
    const rows = await connection({ querys: querySql, values: [] });
+   console.log("jjjjjj---------",rows)
    output.data = rows[0]
    const querySql2 = 'SELECT s.id,s.skilsName FROM `user_skills` us   LEFT JOIN skills s ON us.skilsId = s.id   WHERE userId ="'+id+'"';
    const rows2 = await connection({ querys: querySql2, values: [] });
@@ -26,7 +27,12 @@ router.get('/:id', async(req, res) => {
    res.send(output)    
 });
 
-
+router.post('/searchuser', async(req, res) => {
+   const { searchfield } = req.body;
+   const querySql = 'SELECT DISTINCT u.id,u.name,u.email,u.photo FROM users u LEFT OUTER JOIN user_skills us ON u.id=us.userId LEFT OUTER JOIN skills s ON us.skilsId=s.id WHERE u.name LIKE "%'+searchfield+'%" OR u.email LIKE "%'+searchfield+'%" OR s.skilsName LIKE "%'+searchfield+'%"';
+   const rows = await connection({ querys: querySql, values: [] });
+   res.send(rows)    
+});
 const insertSkills = async (skills,userId) => {
    console.log("userId",userId)
       const rows = await connection({ querys: "DELETE FROM user_skills WHERE userId='"+userId+"'", values: [] });

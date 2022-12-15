@@ -2,7 +2,7 @@ var express = require('express');
 const connection = require('../connection')
 var router = express.Router();
 const jwt_decode = require('jwt-decode');
-const {insertQuery} = require("../sqlquerys");
+const {insertQuery,updateQuery} = require("../sqlquerys");
 
 router.get('/myfriendlist', async(req, res) => {
    var {id} = jwt_decode(req.token)
@@ -35,7 +35,19 @@ router.post('/request', async (req,res) => {
             result:"friend request successfull"
        })
 })
-
+router.post('/requestaccept', async (req,res) => {
+   const {requestId} = req.body;
+   const today = new Date();
+      const updateObj = {
+         "isRequest":0,
+         "updatedDate":today.getTime()
+       }
+       const querySql = await updateQuery(updateObj,"user_friends","WHERE id = '"+requestId+"'")
+       await connection({ querys: querySql, values: [] });
+         res.send({
+            result:"friend request accepted successfull"
+       })
+})
 
 //export this router to use in our index.js
 module.exports = router;
