@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3308
--- Generation Time: Dec 12, 2022 at 08:30 AM
+-- Generation Time: Dec 15, 2022 at 04:14 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.3.29
 
@@ -55,6 +55,46 @@ CREATE TABLE `posts` (
   `postTitle` varchar(512) DEFAULT NULL,
   `image` text DEFAULT NULL,
   `description` text DEFAULT NULL,
+  `createdDate` varchar(512) DEFAULT NULL,
+  `updatedDate` varchar(512) DEFAULT NULL,
+  `is_active` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `posts`
+--
+
+INSERT INTO `posts` (`id`, `userId`, `postTitle`, `image`, `description`, `createdDate`, `updatedDate`, `is_active`) VALUES
+(1, 1, 'post title update', '1671073930865.png', 'post desc update', '1671073062807', '1671073930870', 1),
+(2, 1, 'new post', '', 'new post desc', '1671073382272', NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `posts_comments`
+--
+
+CREATE TABLE `posts_comments` (
+  `id` int(11) NOT NULL,
+  `postId` int(10) DEFAULT NULL,
+  `commentUserId` int(10) DEFAULT NULL,
+  `commet` varchar(512) DEFAULT NULL,
+  `createdDate` varchar(512) DEFAULT NULL,
+  `updatedDate` varchar(512) DEFAULT NULL,
+  `is_active` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `posts_likes`
+--
+
+CREATE TABLE `posts_likes` (
+  `id` int(11) NOT NULL,
+  `postId` int(10) DEFAULT NULL,
+  `likeUserId` int(10) DEFAULT NULL,
+  `isLike` int(10) DEFAULT NULL,
   `createdDate` varchar(512) DEFAULT NULL,
   `updatedDate` varchar(512) DEFAULT NULL,
   `is_active` int(11) NOT NULL DEFAULT 1
@@ -118,12 +158,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `photo`, `dateOfBirth`, `collageId`, `passoutYear`, `about`, `technicalKnowledge`, `achievement`, `yearOfExperience`, `workedProjects`, `createdDate`, `updatedDate`, `is_active`) VALUES
-(1, 'string', 'user1@gmail.com', '12341234', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'string', 'string', 1),
-(2, NULL, 'user2@gmail.com', '12341234', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1670672409202', NULL, 1),
-(3, NULL, 'user3@gmail.com', '12341234', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1670672432716', NULL, 1),
-(4, NULL, 'user4@gmail.com', '12341234', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1670672449557', NULL, 1),
-(5, 'abc', 'user5@gmail.com', '12341234', 'abc.png', '2022-12-07', 1, 2020, 'about data', 'technicalKnowledge data', 'achievement data', 2, 'workedProjects data', '1670812936192', '1670816122777', 1),
-(6, NULL, 'user6@gmail.com', '12341234', NULL, NULL, 1, 2022, NULL, NULL, NULL, NULL, NULL, '1670814611727', NULL, 1);
+(1, 'sharushti', 'user1@gmail.com', '12341234', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'string', 'string', 1),
+(2, 'Akki', 'user2@gmail.com', '12341234', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1670672409202', NULL, 1),
+(3, 'snehal', 'user3@gmail.com', '12341234', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1670672432716', NULL, 1),
+(4, 'akansha', 'akansharahul@gmail.com', '12341234', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1670672449557', NULL, 1),
+(5, 'gayatri', 'user5@gmail.com', '12341234', 'abc.png', '2022-12-07', 1, 2020, 'about data', 'technicalKnowledge data', 'achievement data', 2, 'workedProjects data', '1670812936192', '1670816122777', 1),
+(6, 'rahul', 'user6@gmail.com', '12341234', NULL, NULL, 1, 2022, NULL, NULL, NULL, NULL, NULL, '1670814611727', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -195,6 +235,18 @@ ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `posts_comments`
+--
+ALTER TABLE `posts_comments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `posts_likes`
+--
+ALTER TABLE `posts_likes`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `skills`
 --
 ALTER TABLE `skills`
@@ -232,6 +284,18 @@ ALTER TABLE `colleges`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `posts_comments`
+--
+ALTER TABLE `posts_comments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `posts_likes`
+--
+ALTER TABLE `posts_likes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
