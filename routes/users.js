@@ -1,6 +1,7 @@
 var express = require('express');
 const connection = require('../connection')
 var router = express.Router();
+const jwt_decode = require('jwt-decode');
 const {updateQuery,insertQuery} = require("../sqlquerys");
 
 router.get('/', async(req, res) => {
@@ -29,7 +30,8 @@ router.get('/:id', async(req, res) => {
 
 router.post('/searchuser', async(req, res) => {
    const { searchfield } = req.body;
-   const querySql = 'SELECT DISTINCT u.id,u.name,u.email,u.photo FROM users u LEFT OUTER JOIN user_skills us ON u.id=us.userId LEFT OUTER JOIN skills s ON us.skilsId=s.id WHERE u.name LIKE "%'+searchfield+'%" OR u.email LIKE "%'+searchfield+'%" OR s.skilsName LIKE "%'+searchfield+'%"';
+   var {id} = jwt_decode(req.token);
+   const querySql = 'SELECT DISTINCT u.id, u.name, u.email, u.photo, CASE WHEN f.isRequest = 0 THEN 0 ELSE 1 END as isRequest FROM users u LEFT OUTER JOIN user_skills us ON u.id = us.userId LEFT OUTER JOIN skills s ON us.skilsId = s.id LEFT OUTER JOIN user_friends f ON u.id = f.userId WHERE u.id != "'+id+'" AND (u.name LIKE "%'+searchfield+'%" OR u.email LIKE "%'+searchfield+'%" OR s.skilsName LIKE "%'+searchfield+'%" )';
    const rows = await connection({ querys: querySql, values: [] });
    res.send(rows)    
 });
