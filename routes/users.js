@@ -31,7 +31,7 @@ router.get('/:id', async(req, res) => {
 router.post('/searchuser', async(req, res) => {
    const { searchfield } = req.body;
    var {id} = jwt_decode(req.token);
-   const querySql = 'SELECT DISTINCT u.id, u.name, u.email, u.photo, CASE WHEN f.isRequest = 0 THEN 0  WHEN f.isRequest = 1 THEN 0 ELSE 1 END as isRequest FROM users u LEFT OUTER JOIN user_skills us ON u.id = us.userId LEFT OUTER JOIN skills s ON us.skilsId = s.id LEFT OUTER JOIN user_friends f ON u.id = f.userId WHERE u.id != "'+id+'" AND (u.name LIKE "%'+searchfield+'%" OR u.email LIKE "%'+searchfield+'%" OR s.skilsName LIKE "%'+searchfield+'%" )';
+   const querySql = 'SELECT DISTINCT u.id, u.name, u.email, u.photo, CASE WHEN f.isRequest = 0 THEN 0  WHEN f.isRequest = 1 THEN 0 ELSE 1 END as isRequest FROM users u LEFT OUTER JOIN user_skills us ON u.id = us.userId LEFT OUTER JOIN skills s ON us.skilsId = s.id LEFT OUTER JOIN user_friends f ON  f.userId = "'+id+'" and f.friendId = u.id WHERE u.id != "'+id+'" AND (u.name LIKE "%'+searchfield+'%" OR u.email LIKE "%'+searchfield+'%" OR s.skilsName LIKE "%'+searchfield+'%" )';
    const rows = await connection({ querys: querySql, values: [] });
    res.send(rows)    
 });
