@@ -37,12 +37,9 @@ router.post('/request', async (req,res) => {
 })
 router.post('/requestaccept', async (req,res) => {
    const {requestId} = req.body;
-   const today = new Date();
-      const updateObj = {
-         "isRequest":0,
-         "updatedDate":today.getTime()
-       }
-       const querySql = await updateQuery(updateObj,"user_friends","WHERE id = '"+requestId+"'")
+  const today = new Date();
+       const querySql ="UPDATE user_friends SET isRequest = '0', updatedDate= '"+today.getTime()+"' WHERE id = '"+requestId+"'";
+       console.log("querySql",querySql)
        await connection({ querys: querySql, values: [] });
          res.send({
             result:"friend request accepted successfull"

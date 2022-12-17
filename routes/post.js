@@ -51,5 +51,23 @@ router.patch('/', async(req, res) => {
                      
    
 });
+
+router.get('/byuserId/:userId', async(req, res) => {
+    const { userId } = req.params;
+    var output = {};
+    const querySql = 'SELECT p.*,tlike.totalLike,tComent.totalComments FROM posts p   LEFT JOIN (   select COUNT(pl.id)as totalLike ,pl.postId from posts_likes pl    where pl.isLike = 1 AND pl.is_active = 1 GROUP BY pl.postId  ) tlike on tlike.postId = p.id    LEFT JOIN (   select COUNT(pc.id)as totalComments ,pc.postId from posts_comments pc    where pc.is_active = 1 GROUP BY pc.postId  ) tComent on tComent.postId = p.id  WHERE p.userId = "'+userId+'"';
+    const rows = await connection({ querys: querySql, values: [] });
+    console.log("jjjjjj---------",rows)
+    res.send(rows)    
+ });
+ router.post('/searchpost', async(req, res) => {
+    const { searchfield } = req.body;
+    var output = {};
+    const querySql = "SELECT p.*,tlike.totalLike,tComent.totalComments FROM posts p   LEFT JOIN (   select COUNT(pl.id)as totalLike ,pl.postId from posts_likes pl    where pl.isLike = 1 AND pl.is_active = 1 GROUP BY pl.postId  ) tlike on tlike.postId = p.id    LEFT JOIN (   select COUNT(pc.id)as totalComments ,pc.postId from posts_comments pc    where pc.is_active = 1 GROUP BY pc.postId  ) tComent on tComent.postId = p.id  WHERE p.postTitle LIKE '%"+searchfield+"%' OR p.description LIKE '%"+searchfield+"%'";
+    const rows = await connection({ querys: querySql, values: [] });
+    console.log("jjjjjj---------",rows)
+    res.send(rows)    
+ });
+
 //export this router to use in our index.js
 module.exports = router;
