@@ -27,13 +27,14 @@ router.post('/login',async(req,res) => {
 })
 
 router.post('/register', async (req,res) => {
-    const { email, password,collageId,passoutYear} = req.body;
+    const { email, password,collageId,passoutYear,name} = req.body;
     const whereConditionS = "email='"+email+"'";
             const querySqlCheck = await selectQuery("users",["id"],whereConditionS)
             const rows = await connection({ querys: querySqlCheck, values: [] });
             if (rows.length == 0) {
                     const today = new Date();
                     const insertObj = {
+                        "name":name,
                           "email":email,
                           "password":(password),
                           "collageId":collageId,

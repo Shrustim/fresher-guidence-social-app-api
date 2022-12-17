@@ -29,7 +29,7 @@ app.use(bodyParser.json())
 app.use('/Images', express.static(__dirname + "/Images"));
 app.use('/users',middleware, usersRoute);
 app.use('/skills',middleware, skillsRoute);
-app.use('/colleges',middleware, collegeRoute);
+app.use('/colleges', collegeRoute);
 app.use('/friends',middleware, friendsRoute);
 app.use('/post',middleware,upload.single("image"), postRoute);
 app.use('/auth', authRoute);
