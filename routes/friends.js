@@ -14,7 +14,7 @@ router.get('/myfriendlist', async(req, res) => {
 
 router.get('/myrequests', async(req, res) => {
    var {id} = jwt_decode(req.token);
-   const querySql = 'SELECT u.* FROM users u LEFT JOIN user_friends f ON u.id = f.userId where f.friendId = '+id+' AND f.isRequest = 1';
+   const querySql = 'SELECT f.id as requestId,u.*, FROM users u LEFT JOIN user_friends f ON u.id = f.userId where f.friendId = '+id+' AND f.isRequest = 1';
    const rows = await connection({ querys: querySql, values: [] });
    console.log(rows)
    res.send(rows)    
