@@ -8,6 +8,7 @@ var skillsRoute = require('./routes/skills');
 var authRoute = require('./routes/auth');
 var friendsRoute = require('./routes/friends');
 var postRoute = require('./routes/post');
+var messageRoute = require('./routes/message');
 const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
@@ -31,6 +32,7 @@ app.use('/users',middleware, usersRoute);
 app.use('/skills',middleware, skillsRoute);
 app.use('/colleges', collegeRoute);
 app.use('/friends',middleware, friendsRoute);
+app.use('/message',middleware, messageRoute);
 app.use('/post',middleware,upload.single("image"), postRoute);
 app.use('/auth', authRoute);
 app.listen(8080,() => {
