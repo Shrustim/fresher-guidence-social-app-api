@@ -26,6 +26,43 @@ var app = express();
 app.use(cors({
     origin: '*'
 }))
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+let onlineUser = [];
+const addOnlineUsers = (userData,socketId) => {
+    let user = {...userData};
+    user.socketId = socketId;
+    !onlineUser.some((u) => u.id ===userData.id ) &&
+    onlineUser.push(user)
+
+}
+const getUser = (userId) => {
+ return onlineUser.find(u => u.id == userId)
+}
+const removeOnlineUsers = (socketId) => {
+    onlineUser = onlineUser.filter((u) => u.socketId !== socketId);
+}
+io.on('connection', (socket) => {
+    console.log('user connected');
+    socket.on('addUser', (userData) => {
+        // console.log('userData',userData);
+        addOnlineUsers(userData,socket.id)
+        io.emit("getOnlineUsers",onlineUser)
+    });
+    socket.on('sendMessage', (data) =>  {
+        console.log(data)
+      var user = getUser(data.reciverId)
+      console.log("user",user)
+       io.to(user.socketId).emit("getMessage",data)
+    });
+
+   
+    socket.on('disconnect', function() {
+         removeOnlineUsers(socket.id)
+         io.emit("getOnlineUsers",onlineUser)
+        console.log('user disconnected');
+    });
+})
 app.use(bodyParser.json())
 app.use('/Images', express.static(__dirname + "/Images"));
 app.use('/users',middleware, usersRoute);
@@ -35,6 +72,10 @@ app.use('/friends',middleware, friendsRoute);
 app.use('/message',middleware, messageRoute);
 app.use('/post',middleware,upload.single("image"), postRoute);
 app.use('/auth', authRoute);
-app.listen(8080,() => {
+
+
+
+server.listen(8080,() => {
     console.log("express server is running  on 8080")
 })
+

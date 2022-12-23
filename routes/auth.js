@@ -7,7 +7,7 @@ var router = express.Router();
 
 
 router.post('/login',async(req,res) => {
-    console.log("hiiii")
+    // console.log("hiiii")
 
    const { email, password } = req.body;
    const whereConditionS = "users.email='"+email+"' AND users.password='"+(password)+"' AND users.is_active = 1";

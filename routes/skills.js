@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/', async(req, res) => {
    const querySql = 'SELECT id,skilsName FROM skills WHERE is_active = 1';
    const rows = await connection({ querys: querySql, values: [] });
-   console.log(rows)
+   // console.log(rows)
    res.send(rows)    
 });
 router.post('/', function(req, res){

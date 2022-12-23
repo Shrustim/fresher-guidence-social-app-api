@@ -5,8 +5,8 @@ var router = express.Router();
 
 
 router.post('/', async(req, res) => {
-    console.log("req",req.body)
-    console.log("req",req.file)
+    // console.log("req",req.body)
+    // console.log("req",req.file)
     const { userId,postTitle,description} = req.body;
     const today = new Date();
     const imageName = req.file ? req.file.filename : "";
@@ -28,8 +28,8 @@ router.post('/', async(req, res) => {
    
 });
 router.patch('/', async(req, res) => {
-    console.log("req",req.body)
-    console.log("req",req.file)
+    // console.log("req",req.body)
+    // console.log("req",req.file)
     const { id,userId,postTitle,description} = req.body;
     const today = new Date();
     const imageName = req.file ? req.file.filename : "";
@@ -40,7 +40,7 @@ router.patch('/', async(req, res) => {
              "updatedDate":today.getTime()
         }
         updateObj = imageName ? {...updateObj,"image":imageName}:  updateObj;
-        console.log("updateObj",updateObj)
+        // console.log("updateObj",updateObj)
                     const querySql = await updateQuery(updateObj,"posts","id = '"+id+"'");
                     const insertData = await connection({ querys: querySql, values: [] });
                         if(insertData){
@@ -57,7 +57,7 @@ router.get('/byuserId/:userId', async(req, res) => {
     var output = {};
     const querySql = 'SELECT p.*,tlike.totalLike,tComent.totalComments FROM posts p   LEFT JOIN (   select COUNT(pl.id)as totalLike ,pl.postId from posts_likes pl    where pl.isLike = 1 AND pl.is_active = 1 GROUP BY pl.postId  ) tlike on tlike.postId = p.id    LEFT JOIN (   select COUNT(pc.id)as totalComments ,pc.postId from posts_comments pc    where pc.is_active = 1 GROUP BY pc.postId  ) tComent on tComent.postId = p.id  WHERE p.userId = "'+userId+'"';
     const rows = await connection({ querys: querySql, values: [] });
-    console.log("jjjjjj---------",rows)
+    // console.log("jjjjjj---------",rows)
     res.send(rows)    
  });
  router.post('/searchpost', async(req, res) => {
@@ -65,7 +65,7 @@ router.get('/byuserId/:userId', async(req, res) => {
     var output = {};
     const querySql = "SELECT p.*,tlike.totalLike,tComent.totalComments FROM posts p   LEFT JOIN (   select COUNT(pl.id)as totalLike ,pl.postId from posts_likes pl    where pl.isLike = 1 AND pl.is_active = 1 GROUP BY pl.postId  ) tlike on tlike.postId = p.id    LEFT JOIN (   select COUNT(pc.id)as totalComments ,pc.postId from posts_comments pc    where pc.is_active = 1 GROUP BY pc.postId  ) tComent on tComent.postId = p.id  WHERE p.postTitle LIKE '%"+searchfield+"%' OR p.description LIKE '%"+searchfield+"%'";
     const rows = await connection({ querys: querySql, values: [] });
-    console.log("jjjjjj---------",rows)
+    // console.log("jjjjjj---------",rows)
     res.send(rows)    
  });
 
