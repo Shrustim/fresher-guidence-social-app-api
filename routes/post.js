@@ -61,7 +61,7 @@ router.get('/:postId', async(req, res) => {
 router.get('/byuserId/:userId', async(req, res) => {
     const { userId } = req.params;
     var output = {};
-    const querySql = 'SELECT p.*,tlike.totalLike,tComent.totalComments FROM posts p   LEFT JOIN (   select COUNT(pl.id)as totalLike ,pl.postId from posts_likes pl    where pl.isLike = 1 AND pl.is_active = 1 GROUP BY pl.postId  ) tlike on tlike.postId = p.id    LEFT JOIN (   select COUNT(pc.id)as totalComments ,pc.postId from posts_comments pc    where pc.is_active = 1 GROUP BY pc.postId  ) tComent on tComent.postId = p.id  WHERE p.userId = "'+userId+'"';
+    const querySql = 'SELECT p.*,tlike.totalLike,tComent.totalComments,u.name FROM posts p  LEFT OUTER JOIN users u ON p.userId=u.id   LEFT JOIN (   select COUNT(pl.id)as totalLike ,pl.postId from posts_likes pl    where pl.isLike = 1 AND pl.is_active = 1 GROUP BY pl.postId  ) tlike on tlike.postId = p.id    LEFT JOIN (   select COUNT(pc.id)as totalComments ,pc.postId from posts_comments pc    where pc.is_active = 1 GROUP BY pc.postId  ) tComent on tComent.postId = p.id  WHERE p.userId = "'+userId+'"  order by desc p.id';
     const rows = await connection({ querys: querySql, values: [] });
     // console.log("jjjjjj---------",rows)
     res.send(rows)    
@@ -69,7 +69,7 @@ router.get('/byuserId/:userId', async(req, res) => {
  router.post('/searchpost', async(req, res) => {
     const { searchfield } = req.body;
     var output = {};
-    const querySql = "SELECT p.*,tlike.totalLike,tComent.totalComments,u.name FROM posts p LEFT OUTER JOIN users u ON p.userId=u.id   LEFT JOIN (   select COUNT(pl.id)as totalLike ,pl.postId from posts_likes pl    where pl.isLike = 1 AND pl.is_active = 1 GROUP BY pl.postId  ) tlike on tlike.postId = p.id    LEFT JOIN (   select COUNT(pc.id)as totalComments ,pc.postId from posts_comments pc    where pc.is_active = 1 GROUP BY pc.postId  ) tComent on tComent.postId = p.id  WHERE p.postTitle LIKE '%"+searchfield+"%' OR p.description LIKE '%"+searchfield+"%'";
+    const querySql = "SELECT p.*,tlike.totalLike,tComent.totalComments,u.name FROM posts p LEFT OUTER JOIN users u ON p.userId=u.id   LEFT JOIN (   select COUNT(pl.id)as totalLike ,pl.postId from posts_likes pl    where pl.isLike = 1 AND pl.is_active = 1 GROUP BY pl.postId  ) tlike on tlike.postId = p.id    LEFT JOIN (   select COUNT(pc.id)as totalComments ,pc.postId from posts_comments pc    where pc.is_active = 1 GROUP BY pc.postId  ) tComent on tComent.postId = p.id  WHERE p.postTitle LIKE '%"+searchfield+"%' OR p.description LIKE '%"+searchfield+"%' order by desc p.id";
     const rows = await connection({ querys: querySql, values: [] });
     // console.log("jjjjjj---------",rows)
     res.send(rows)    
