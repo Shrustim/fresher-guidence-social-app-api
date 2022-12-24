@@ -9,6 +9,8 @@ var authRoute = require('./routes/auth');
 var friendsRoute = require('./routes/friends');
 var postRoute = require('./routes/post');
 var messageRoute = require('./routes/message');
+var profileimageRoute = require('./routes/profileimage');
+var coverimageRoute = require('./routes/coverimage');
 const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
@@ -52,8 +54,10 @@ io.on('connection', (socket) => {
     socket.on('sendMessage', (data) =>  {
         console.log(data)
       var user = getUser(data.reciverId)
-      console.log("user",user)
+      if(user && user.socketId){
        io.to(user.socketId).emit("getMessage",data)
+      }
+      
     });
 
    
@@ -70,6 +74,9 @@ app.use('/skills',middleware, skillsRoute);
 app.use('/colleges', collegeRoute);
 app.use('/friends',middleware, friendsRoute);
 app.use('/message',middleware, messageRoute);
+app.use('/post',middleware,upload.single("image"), postRoute);
+app.use('/updateprofilephoto',middleware,upload.single("image"), profileimageRoute);
+app.use('/updatecoverphoto',middleware,upload.single("image"), coverimageRoute);
 app.use('/post',middleware,upload.single("image"), postRoute);
 app.use('/auth', authRoute);
 

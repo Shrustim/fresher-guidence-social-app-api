@@ -51,7 +51,13 @@ router.patch('/', async(req, res) => {
                      
    
 });
-
+router.get('/:postId', async(req, res) => {
+    const { postId } = req.params;
+    var output = {};
+    const querySql = 'SELECT p.* from posts p  WHERE p.id = "'+postId+'"';
+    const rows = await connection({ querys: querySql, values: [] });
+    res.send(rows)    
+ });
 router.get('/byuserId/:userId', async(req, res) => {
     const { userId } = req.params;
     var output = {};
@@ -68,6 +74,52 @@ router.get('/byuserId/:userId', async(req, res) => {
     // console.log("jjjjjj---------",rows)
     res.send(rows)    
  });
-
+ router.post('/comment', async(req, res) => {
+    const today = new Date();
+    const { commenttext,postId,commentUserId } = req.body;
+    const insertObj = {
+        "commet":commenttext,
+        "postId":postId,
+        "commentUserId":commentUserId,
+        "createdDate":today.getTime()
+   }
+               const querySql = await insertQuery(insertObj,"posts_comments")
+               const insertData = await connection({ querys: querySql, values: [] });
+                   if(insertData){
+                       res.send({result:"comments created successfully"});
+                   }else{
+                       res.send('Error');
+                   }
+ });
+ router.post('/like', async(req, res) => {
+    const today = new Date();
+    const { isLike,postId,likeuserId } = req.body;
+    const querySql1 = "SELECT * from posts_likes WHERE postId = '"+ postId+"' AND  likeUserId = '"+likeuserId +"'";
+    const rows = await connection({ querys: querySql1, values: [] });
+    if(rows && rows.length > 0) {
+       const querySql ="UPDATE posts_likes SET isLike = '"+isLike+"', updatedDate= '"+today.getTime()+"' WHERE id = '"+rows[0].id+"'";
+       const insertData = await connection({ querys: querySql, values: [] });
+                       if(insertData){
+                           res.send({result:"like created successfully"});
+                       }else{
+                           res.send('Error');
+                       }
+    }else{
+        const insertObj = {
+            "isLike":isLike,
+            "postId":postId,
+            "likeUserId":likeuserId,
+            "createdDate":today.getTime()
+        }
+                   const querySql = await insertQuery(insertObj,"posts_likes")
+                   const insertData = await connection({ querys: querySql, values: [] });
+                       if(insertData){
+                           res.send({result:"like created successfully"});
+                       }else{
+                           res.send('Error');
+                       }
+    }
+   
+ });
 //export this router to use in our index.js
 module.exports = router;
