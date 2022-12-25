@@ -29,7 +29,12 @@ app.use(cors({
     origin: '*'
 }))
 const server = require('http').createServer(app);
-const io = require('socket.io')(server);
+const io = require('socket.io')(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST","PATCH"],
+  },
+});
 let onlineUser = [];
 const addOnlineUsers = (userData,socketId) => {
     let user = {...userData};
@@ -66,6 +71,41 @@ io.on('connection', (socket) => {
          io.emit("getOnlineUsers",onlineUser)
         console.log('user disconnected');
     });
+
+
+
+    /* vedio call code start ------*/
+     socket.emit("me", socket.id);
+
+  socket.on("callUser", ({ userToCall, signalData, from, name }) => {
+    io.to(userToCall).emit("callUser", {
+      signal: signalData,
+      from,
+      name,
+    });
+  });
+
+  socket.on("updateMyMedia", ({ type, currentMediaStatus }) => {
+    console.log("updateMyMedia");
+    socket.broadcast.emit("updateUserMedia", { type, currentMediaStatus });
+  });
+
+  socket.on("msgUser", ({ name, to, msg, sender }) => {
+    io.to(to).emit("msgRcv", { name, msg, sender });
+  });
+
+  socket.on("answerCall", (data) => {
+    socket.broadcast.emit("updateUserMedia", {
+      type: data.type,
+      currentMediaStatus: data.myMediaStatus,
+    });
+    io.to(data.to).emit("callAccepted", data);
+  });
+  socket.on("endCall", ({ id }) => {
+    io.to(id).emit("endCall");
+  });
+  
+  /* vedio call code end */
 })
 app.use(bodyParser.json())
 app.use('/Images', express.static(__dirname + "/Images"));
