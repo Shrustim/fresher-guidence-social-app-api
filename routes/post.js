@@ -127,7 +127,7 @@ router.get('/byuserId/:userId', async(req, res) => {
   router.get('/comments/:postId', async(req, res) => {
     const today = new Date();
     const { postId } = req.params;
-   const querySql = 'SELECT c.*,u.name,u.photo FROM posts_comments c LEFT OUTER JOIN users u ON c.commentUserId = u.id WHERE c.postId = '"+postId+"'  order by  c.id desc';
+   const querySql = 'SELECT c.*,u.name,u.photo FROM posts_comments c LEFT OUTER JOIN users u ON c.commentUserId = u.id WHERE c.postId = "'+postId+'"  order by  c.id desc';
     const rows = await connection({ querys: querySql, values: [] });
      res.send(rows)    
  });
