@@ -38,6 +38,15 @@ router.post('/getmessages', async(req, res) => {
     output.userData = rows2
     res.send(output)    
  });
+ router.post('/updateisread', async(req, res) => {
+    const { messageId} = req.body;
+    var output = {};
+    const today = new Date();
+    const querySql1 ="UPDATE messages SET isRead = '1', updatedDate= '"+today.getTime()+"' WHERE id = '"+messageId+"'";
+    await connection({ querys: querySql1, values: [] });
+    res.send(output)    
+ });
+ 
 
 //export this router to use in our index.js
 module.exports = router;
