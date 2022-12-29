@@ -26,6 +26,10 @@ router.post('/send', async(req, res) => {
 router.post('/getmessages', async(req, res) => {
     const { loginuserId,userId} = req.body;
     var output = {};
+    const today = new Date();
+    const querySql1 ="UPDATE messages SET isRead = '1', updatedDate= '"+today.getTime()+"' WHERE isRead = 0 and senderId = '"+userId+"' and  reciverId = '"+loginuserId+"'";
+    await connection({ querys: querySql1, values: [] });
+
     const querySql = "SELECT id,senderId,reciverId,message_text,createdDate FROM messages WHERE (senderId = "+loginuserId+" and reciverId = "+userId+" ) OR (senderId = "+userId+" and reciverId = "+loginuserId+" );";
     const rows = await connection({ querys: querySql, values: [] });
     const querySql2 = "SELECT id,name,email,photo FROM users WHERE id = "+userId;

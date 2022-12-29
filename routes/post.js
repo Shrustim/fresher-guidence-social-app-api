@@ -54,8 +54,9 @@ router.patch('/', async(req, res) => {
 });
 router.get('/:postId', async(req, res) => {
     const { postId } = req.params;
+    var {id} = jwt_decode(req.token);
     var output = {};
-    const querySql = 'SELECT p.* from posts p  WHERE p.id = "'+postId+'"';
+    const querySql = 'SELECT p.*,tlike.totalLike,tComent.totalComments,u.name, pll.isLike FROM posts p  LEFT OUTER JOIN users u ON p.userId=u.id LEFT OUTER JOIN posts_likes pll ON pll.likeUserId = "'+id+'" and p.id = pll.postId   LEFT JOIN (   select COUNT(pl.id)as totalLike ,pl.postId from posts_likes pl    where pl.isLike = 1 AND pl.is_active = 1 GROUP BY pl.postId  ) tlike on tlike.postId = p.id    LEFT JOIN (   select COUNT(pc.id)as totalComments ,pc.postId from posts_comments pc    where pc.is_active = 1 GROUP BY pc.postId  ) tComent on tComent.postId = p.id  WHERE p.id = "'+postId+'"';
     const rows = await connection({ querys: querySql, values: [] });
     res.send(rows)    
  });
