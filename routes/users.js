@@ -60,7 +60,6 @@ router.patch('/', async (req,res) => {
                          "name":name,
                          "collageId":collageId,
                          "passoutYear":passoutYear,
-                         "photo":photo,
                          "dateOfBirth":dateOfBirth,
                          "about":about,
                          "technicalKnowledge":technicalKnowledge,
