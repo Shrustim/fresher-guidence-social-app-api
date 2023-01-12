@@ -39,13 +39,32 @@ router.post('/request', async (req,res) => {
        }
        const querySql = await insertQuery(insertObj,"user_friends")
        await connection({ querys: querySql, values: [] });
+       const insertObjj = {
+         "userId":friendId,
+         "notifyuserId":userId,
+         "text": "New friend request.",
+         "createdDate":today.getTime()
+     }
+             const querySql1 = await insertQuery(insertObjj,"notifications")
+             await connection({ querys: querySql1, values: [] });
          res.send({
             result:"friend request successfull"
        })
 })
 router.post('/requestaccept', async (req,res) => {
    const {requestId} = req.body;
-  const today = new Date();
+   const querySql1 = 'SELECT f.* FROM user_friends f WHERE id = '+requestId+' ';
+   const rows1 = await connection({ querys: querySql1, values: [] });
+   const today = new Date();
+   const insertObjj = {
+      "userId":rows1[0].userId,
+      "notifyuserId":rows1[0].friendId,
+      "text": "Your friend request accepted.",
+      "createdDate":today.getTime()
+  }
+          const querySql2 = await insertQuery(insertObjj,"notifications")
+          await connection({ querys: querySql2, values: [] });
+ 
        const querySql ="UPDATE user_friends SET isRequest = '0', updatedDate= '"+today.getTime()+"' WHERE id = '"+requestId+"'";
       //  console.log("querySql",querySql)
        await connection({ querys: querySql, values: [] });

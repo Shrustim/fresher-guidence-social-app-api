@@ -20,7 +20,7 @@ router.patch('/', async(req, res) => {
                    const querySql = await updateQuery(updateObj,"users","id = '"+userId+"'");
                    const insertData = await connection({ querys: querySql, values: [] });
                        if(insertData){
-                           res.send({result:"users cover image updated successfully"});
+                           res.send({result:"users cover image updated successfully",image:imageName});
                        }else{
                            res.send('Error');
                        }

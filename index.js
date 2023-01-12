@@ -11,6 +11,7 @@ var postRoute = require('./routes/post');
 var messageRoute = require('./routes/message');
 var profileimageRoute = require('./routes/profileimage');
 var coverimageRoute = require('./routes/coverimage');
+var notificationsRoute = require('./routes/notifications')
 const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
@@ -148,6 +149,8 @@ app.use('/updateprofilephoto',middleware,upload.single("image"), profileimageRou
 app.use('/updatecoverphoto',middleware,upload.single("image"), coverimageRoute);
 app.use('/post',middleware,upload.single("image"), postRoute);
 app.use('/auth', authRoute);
+app.use('/notifications',middleware, notificationsRoute);
+
 
 
 
