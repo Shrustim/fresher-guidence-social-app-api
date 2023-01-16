@@ -73,5 +73,21 @@ router.post('/requestaccept', async (req,res) => {
        })
 })
 
+router.post('/blockuser', async (req,res) => {
+   const { blockUserId} = req.body;
+   var {id} = jwt_decode(req.token) 
+   const today = new Date();
+   const insertObjj = {
+      "blockUserId":blockUserId,
+      "userId":id,
+      "createdDate":today.getTime()
+  }
+          const querySql1 = await insertQuery(insertObjj,"block_users")
+          await connection({ querys: querySql1, values: [] });
+      res.send({
+         result:"user block successfull"
+    })
+})
+
 //export this router to use in our index.js
 module.exports = router;

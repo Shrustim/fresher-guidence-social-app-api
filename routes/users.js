@@ -13,6 +13,7 @@ router.get('/', async(req, res) => {
 
 router.get('/:id', async(req, res) => {
    const { id } = req.params;
+   var loginuserData = jwt_decode(req.token);
    var output = {};
    const querySql = 'SELECT u.*,c.collegeName FROM users u LEFT OUTER JOIN colleges c  ON u.collageId=c.id  where u.id =  "'+id+'"';
    const rows = await connection({ querys: querySql, values: [] });
