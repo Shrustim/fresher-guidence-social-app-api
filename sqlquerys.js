@@ -10,12 +10,18 @@
     var values = "";
     var lastKey = Object.keys(obj)[Object.keys(obj).length-1];
     for (const key in obj) {
-        var value = ""+obj[key]+"";
+        if(obj[key]) { 
+        var value = obj[key].toString() //String(""+obj[key]+"");
+        console.log("typeof",typeof value)
+        if(value){
         if(lastKey == key){
-            values+= key+ " = '"+value.replaceAll("'", "\'")+"'";
+            values+= key+ " = '"+value.replace(/'/g, "\'")+"'";
         }else{
-            values+= key+ " = '"+value.replaceAll("'", "\'")+"', ";
+            values+= key+ " = '"+value.replace(/'/g, "\'")+"', ";
         }
+      }
+        }
+       
        
       }
     var sql = "UPDATE "+tableName+" SET "+values+" WHERE "+ whereCondition+"";
