@@ -65,7 +65,13 @@ io.on('connection', (socket) => {
       }
       
     });
-
+    socket.on("newNotification", (data) => {
+      var user = getUser(data.id)
+      if(user && user.socketId){
+       io.to(user.socketId).emit("newNotification",data)
+      }
+      
+    });
    
     socket.on('disconnect', function() {
          removeOnlineUsers(socket.id)

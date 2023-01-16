@@ -24,6 +24,9 @@ router.get('/:id', async(req, res) => {
    const querySql3 = 'SELECT ( SELECT COUNT(u.id) as following FROM users u LEFT OUTER JOIN user_friends f ON u.id = f.friendId where f.userId = "'+id+'" AND f.isRequest = 0) as following, (SELECT COUNT(u.id) as followers FROM users u LEFT OUTER JOIN user_friends f ON u.id = f.userId where f.friendId = "'+id+'" AND f.isRequest = 0) as followers';
    const rows3 = await connection({ querys: querySql3, values: [] });
    output.friends = rows3
+   const querySql4 = 'SELECT COUNT(id) as count FROM `notifications` WHERE userId = "'+id+'" and isRead = 0';
+   const rows4 = await connection({ querys: querySql4, values: [] });
+   output.notificationCount = rows4[0].count
    // console.log(output)
    res.send(output)    
 });
