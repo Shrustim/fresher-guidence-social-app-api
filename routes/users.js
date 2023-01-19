@@ -14,7 +14,10 @@ router.get('/', async(req, res) => {
 router.get('/:id', async(req, res) => {
    const { id } = req.params;
    var loginuserData = jwt_decode(req.token);
-   var output = {};
+   var output = {
+      isFriend: false,
+      isBlock:false
+   };
    const querySql = 'SELECT u.*,c.collegeName FROM users u LEFT OUTER JOIN colleges c  ON u.collageId=c.id  where u.id =  "'+id+'"';
    const rows = await connection({ querys: querySql, values: [] });
    // console.log("jjjjjj---------",rows)
@@ -27,6 +30,17 @@ router.get('/:id', async(req, res) => {
    output.friends = rows3
    const querySql4 = 'SELECT COUNT(id) as count FROM `notifications` WHERE userId = "'+id+'" and isRead = 0';
    const rows4 = await connection({ querys: querySql4, values: [] });
+   const checksql = "SELECT * FROM user_friends where ( userId = '"+id+"' and friendId = '"+loginuserData.id+"' ) or ( userId = '"+loginuserData.id+"' and friendId = '"+id+"' ) and isRequest = 0"
+   const rowsCheck = await connection({ querys: checksql, values: [] });
+   if(rowsCheck.length > 0 ){
+      output.isFriend = true     
+    }
+   const checksql1 = "SELECT * FROM `block_users` where ( userId = '"+id+"' and blockUserId = '"+loginuserData.id+"') or (userId = '"+loginuserData.id+"' and blockUserId = '"+id+"') "
+   const rowsCheck1 = await connection({ querys: checksql1, values: [] });
+    if(rowsCheck1.length > 0){
+      output.isBlock = true     
+    }
+   output.blockuserData = rowsCheck1
    output.notificationCount = rows4[0].count
    // console.log(output)
    res.send(output)    
