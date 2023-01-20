@@ -49,7 +49,7 @@ router.get('/:id', async(req, res) => {
 router.post('/searchuser', async(req, res) => {
    const { searchfield } = req.body;
    var {id} = jwt_decode(req.token);
-   const querySql = 'SELECT DISTINCT u.id, u.name, u.email, u.photo, CASE WHEN f.isRequest = 0 THEN 0  WHEN f.isRequest = 1 THEN 0 ELSE 1 END as isRequest FROM users u LEFT OUTER JOIN user_skills us ON u.id = us.userId LEFT OUTER JOIN skills s ON us.skilsId = s.id LEFT OUTER JOIN user_friends f ON  f.userId = "'+id+'" and f.friendId = u.id WHERE u.id != "'+id+'" AND (u.name LIKE "%'+searchfield+'%" OR u.email LIKE "%'+searchfield+'%" OR s.skilsName LIKE "%'+searchfield+'%" )';
+   const querySql = 'SELECT DISTINCT u.id, u.name, u.email, u.photo, CASE WHEN f.isRequest = 0 THEN 0  WHEN f.isRequest = 1 THEN 0 ELSE 1 END as isRequest FROM users u LEFT OUTER JOIN user_skills us ON u.id = us.userId LEFT OUTER JOIN skills s ON us.skilsId = s.id LEFT OUTER JOIN user_friends f ON  f.userId = "'+id+'" and f.friendId = u.id WHERE u.id != "'+id+'" AND (u.name LIKE "%'+searchfield+'%" OR u.email LIKE "%'+searchfield+'%" OR u.workedCompanies LIKE "%'+searchfield+'%" OR s.skilsName LIKE "%'+searchfield+'%" )';
    const rows = await connection({ querys: querySql, values: [] });
    res.send(rows)    
 });
@@ -70,7 +70,7 @@ const insertSkills = async (skills,userId) => {
 } 
 router.patch('/', async (req,res) => {
    const { id,name,collageId,passoutYear,photo,dateOfBirth,
-      about,technicalKnowledge,achievement,yearOfExperience,workedProjects,skills} = req.body;
+      about,technicalKnowledge,achievement,yearOfExperience,workedProjects,skills,workedCompanies} = req.body;
       // console.log("skills",skills)
                    const today = new Date();
                    const whereObj = " id = "+id+" ";
@@ -84,6 +84,7 @@ router.patch('/', async (req,res) => {
                          "achievement":achievement,
                          "yearOfExperience":yearOfExperience,
                          "workedProjects":workedProjects,
+                         "workedCompanies":workedCompanies,
                          "updatedDate":today.getTime()
                    }
                    const querySql = await updateQuery(updateObj,"users",whereObj)

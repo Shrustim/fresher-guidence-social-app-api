@@ -6,7 +6,7 @@ const {insertQuery,updateQuery} = require("../sqlquerys");
 
 router.get('/myfriendlist', async(req, res) => {
    var {id} = jwt_decode(req.token)
-   const querySql = 'SELECT u.* FROM users u LEFT OUTER JOIN user_friends f ON u.id = f.friendId where f.userId = '+id+' AND f.isRequest = 0 UNION SELECT u.* FROM users u LEFT OUTER JOIN user_friends f ON u.id = f.userId where f.friendId = '+id+' AND f.isRequest = 0';
+   const querySql = 'SELECT u.* ,bu.blockUserId FROM users u LEFT OUTER JOIN block_users bu ON u.id = bu.userId LEFT OUTER JOIN user_friends f ON u.id = f.friendId where f.userId = "'+id+'" AND f.isRequest = 0 AND bu.blockUserId IS NULL UNION SELECT u.*,bu.blockUserId FROM users u LEFT OUTER JOIN block_users bu ON u.id = bu.userId LEFT OUTER JOIN user_friends f ON u.id = f.userId where f.friendId = "'+id+'" AND f.isRequest = 0 AND bu.blockUserId IS NULL';
    const rows = await connection({ querys: querySql, values: [] });
    // console.log(rows)
    res.send(rows)    
@@ -14,7 +14,7 @@ router.get('/myfriendlist', async(req, res) => {
 
 router.get('/myfriendlistMessage', async(req, res) => {
    var {id} = jwt_decode(req.token)
-   const querySql = 'SELECT u.*, IFNULL( m.messageCount,0) as messageCount FROM users u LEFT OUTER JOIN user_friends f ON u.id = f.friendId LEFT JOIN ( SELECT COUNT(id) as messageCount,senderId FROM messages WHERE isRead = 0 and reciverId = '+id+' GROUP by senderId ) m on u.id = m.senderId WHERE f.userId = '+id+' AND f.isRequest = 0 UNION SELECT u.*, IFNULL( m.messageCount,0) as messageCount FROM users u LEFT OUTER JOIN user_friends f ON u.id = f.userId LEFT JOIN ( SELECT COUNT(id) as messageCount,senderId FROM messages WHERE isRead = 0 and reciverId = '+id+' GROUP by senderId ) m on u.id = m.senderId WHERE f.friendId = '+id+' AND f.isRequest = 0   ORDER by messageCount desc';
+   const querySql = 'SELECT u.*, IFNULL(m.messageCount, 0) as messageCount FROM users u LEFT OUTER JOIN block_users bu ON u.id = bu.userId LEFT OUTER JOIN user_friends f ON u.id = f.friendId LEFT JOIN( SELECT COUNT(id) as messageCount, senderId FROM messages WHERE isRead = 0 and reciverId = '+id+' GROUP by senderId) m on u.id = m.senderId WHERE f.userId = '+id+' AND f.isRequest = 0 AND bu.blockUserId IS NULL UNION SELECT u.*, IFNULL(m.messageCount, 0) as messageCount FROM users u LEFT OUTER JOIN block_users bu ON u.id = bu.userId LEFT OUTER JOIN user_friends f ON u.id = f.userId LEFT JOIN ( SELECT COUNT(id) as messageCount, senderId FROM messages WHERE isRead = 0 and reciverId ='+id+' GROUP by senderId ) m on u.id = m.senderId WHERE f.friendId = '+id+' AND f.isRequest = 0 AND bu.blockUserId IS NULL ORDER by messageCount desc';
    const rows = await connection({ querys: querySql, values: [] });
    // console.log(rows)
    res.send(rows)    
@@ -88,6 +88,17 @@ router.post('/blockuser', async (req,res) => {
          result:"user block successfull"
     })
 })
+
+router.post('/unblockuser', async (req,res) => {
+   const { blockUserId} = req.body;
+   var {id} = jwt_decode(req.token) 
+   const deleteBlockSql = "DELETE FROM block_users WHERE userId = '"+id+"' and blockUserId = '"+blockUserId+"'";
+           await connection({ querys: deleteBlockSql, values: [] });
+       res.send({
+         result:"user block successfull"
+    })
+})
+
 
 //export this router to use in our index.js
 module.exports = router;
