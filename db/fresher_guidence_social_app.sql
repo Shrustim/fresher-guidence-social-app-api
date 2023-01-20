@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 29, 2022 at 05:40 AM
+-- Generation Time: Jan 20, 2023 at 04:37 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.3.27
 
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `fresher_guidence_social_app`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `block_users`
+--
+
+CREATE TABLE `block_users` (
+  `id` int(11) NOT NULL,
+  `userId` int(10) DEFAULT NULL,
+  `blockUserId` int(10) DEFAULT NULL,
+  `createdDate` varchar(512) DEFAULT NULL,
+  `updatedDate` varchar(512) DEFAULT NULL,
+  `is_active` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `block_users`
+--
+
+INSERT INTO `block_users` (`id`, `userId`, `blockUserId`, `createdDate`, `updatedDate`, `is_active`) VALUES
+(6, 2, 21, '1674181680620', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -65,151 +87,106 @@ CREATE TABLE `messages` (
 --
 
 INSERT INTO `messages` (`id`, `senderId`, `reciverId`, `message_text`, `isRead`, `createdDate`, `updatedDate`, `is_active`) VALUES
-(1, 1, 2, 'hii', 1, '1671682995073', '1672283315505', 1),
-(2, 2, 1, 'hello', 1, '1671683052661', '1672282320700', 1),
-(3, 1, 2, 'What is Lorem Ipsum?', 1, '1671683139506', '1672283315505', 1),
-(4, 2, 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unk', 1, '1671683156087', '1672282320700', 1),
-(5, 1, 2, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s sta', 1, '1671683172384', '1672283315505', 1),
-(6, 2, 1, 'Lorem Ipsum is simply dummy text of the printing and ty', 1, '1671683182110', '1672282320700', 1),
-(7, 2, 1, 'Lorem Ipsum is simply dummy text of the printing and ty', 1, '1671683182411', '1672282320700', 1),
-(8, 1, 2, 'Lorem Ipsum is simply dummy text of the printing and typ', 1, '1671683193213', '1672283315505', 1),
-(9, 1, 2, 'Lorem Ipsum is simply dummy text of the printing and typ', 1, '1671683193810', '1672283315505', 1),
-(10, 1, 2, 'Lorem Ipsum is simply dummy text of the printing and typ', 1, '1671683194083', '1672283315505', 1),
-(11, 1, 2, 'Lorem Ipsum is simply dummy text of the printing and typ', 1, '1671683194465', '1672283315505', 1),
-(12, 1, 2, 'HIII', 1, '1671683210781', '1672283315505', 1),
-(13, 1, 4, 'hii', 1, '1671689360236', '1672287431827', 1),
-(14, 2, 1, 'hello', 1, '1671857102573', '1672282320700', 1),
-(15, 2, 1, 'helloii', 1, '1671857107573', '1672282320700', 1),
-(16, 1, 2, 'hii', 1, '1671857110913', '1672283315505', 1),
-(17, 2, 1, 'helloii', 1, '1671857114054', '1672282320700', 1),
-(18, 2, 1, 'heloo', 1, '1671954615682', '1672282320700', 1),
-(19, 2, 1, 'heloo', 1, '1671954620850', '1672282320700', 1),
-(20, 1, 2, 'iii', 1, '1671954755706', '1672283315505', 1),
-(21, 2, 1, 'heloo', 1, '1671954835941', '1672282320700', 1),
-(22, 2, 1, 'heloo', 1, '1671954844284', '1672282320700', 1),
-(23, 2, 1, 'heloo', 1, '1671954854161', '1672282320700', 1),
-(24, 1, 2, 'hii', 1, '1671954859581', '1672283315505', 1),
-(25, 2, 1, 'fxgfdgfd', 1, '1671954869005', '1672282320700', 1),
-(26, 2, 1, 'gfdgdfg', 1, '1671954912321', '1672282320700', 1),
-(27, 1, 2, 'dfgdfg', 1, '1671954914690', '1672283315505', 1),
-(28, 2, 1, 'gdfgdf', 1, '1671954949681', '1672282320700', 1),
-(29, 2, 1, 'hii', 1, '1671955000470', '1672282320700', 1),
-(30, 1, 2, 'jjj', 1, '1671955004407', '1672283315505', 1),
-(31, 2, 1, 'hii', 1, '1671955007941', '1672282320700', 1),
-(32, 1, 2, 'jjj', 1, '1671955009414', '1672283315505', 1),
-(33, 2, 1, 'hii', 1, '1671955010820', '1672282320700', 1),
-(34, 1, 2, 'jjj', 1, '1671955011796', '1672283315505', 1),
-(35, 1, 2, 'jjj', 1, '1671955055086', '1672283315505', 1),
-(36, 1, 2, 'jjj', 1, '1671955062340', '1672283315505', 1),
-(37, 1, 2, 'jjj', 1, '1671955077539', '1672283315505', 1),
-(38, 1, 2, 'jjj', 1, '1671955080470', '1672283315505', 1),
-(39, 1, 2, 'jjj', 1, '1671955082157', '1672283315505', 1),
-(40, 1, 2, 'jjj', 1, '1671955085366', '1672283315505', 1),
-(41, 2, 1, 'hii', 1, '1671955136407', '1672282320700', 1),
-(42, 2, 1, 'fdgdf', 1, '1671955332679', '1672282320700', 1),
-(43, 1, 2, 'dfg', 1, '1671955335674', '1672283315505', 1),
-(44, 1, 2, 'dfg', 1, '1671955344422', '1672283315505', 1),
-(45, 2, 1, 'fdgdfdfg', 1, '1671955359669', '1672282320700', 1),
-(46, 2, 1, 'fdgdfdfg', 1, '1671955464225', '1672282320700', 1),
-(47, 1, 4, 'dfg', 1, '1671955762827', '1672287431827', 1),
-(48, 1, 4, 'dfg', 1, '1671955769077', '1672287431827', 1),
-(49, 1, 4, 'dfg', 1, '1671955774613', '1672287431827', 1),
-(50, 1, 2, 'jj', 1, '1671955806973', '1672283315505', 1),
-(51, 1, 2, 'jj', 1, '1671955811370', '1672283315505', 1),
-(52, 2, 13, 'hii', 0, '1671956166418', NULL, 1),
-(53, 2, 14, 'hii', 1, '1671956174909', '1672287352468', 1),
-(54, 2, 1, 'hii', 1, '1671956180104', '1672282320700', 1),
-(55, 1, 2, 'jjj', 1, '1671956190490', '1672283315505', 1),
-(56, 1, 2, 'jjj', 1, '1671956196966', '1672283315505', 1),
-(57, 2, 1, 'hii', 1, '1671956634220', '1672282320700', 1),
-(58, 2, 1, 'hii', 1, '1671956635947', '1672282320700', 1),
-(59, 2, 14, 'dgdf', 1, '1671959815755', '1672287352468', 1),
-(60, 2, 1, 'hiii', 1, '1671959868124', '1672282320700', 1),
-(61, 1, 2, 'dfdsf', 1, '1671959871052', '1672283315505', 1),
-(62, 2, 1, 'hiiidfs', 1, '1671959873394', '1672282320700', 1),
-(63, 1, 2, 'dfdsfdsfds', 1, '1671959880084', '1672283315505', 1),
-(64, 2, 13, 'sdfsf', 0, '1671959946633', NULL, 1),
-(65, 1, 2, 'sdf', 1, '1671959950114', '1672283315505', 1),
-(66, 2, 13, 'sdfsfsdf', 0, '1671959953048', NULL, 1),
-(67, 1, 2, 'sdfsdf', 1, '1671959964249', '1672283315505', 1),
-(68, 2, 1, 'sdfsfsdf', 1, '1671959966344', '1672282320700', 1),
-(69, 1, 2, 'sdfsdfsdfsd', 1, '1671959972195', '1672283315505', 1),
-(70, 1, 2, 'sdfsdfsdfsdsdf', 1, '1671959979953', '1672283315505', 1),
-(71, 2, 1, 'sdfsfsdsdff', 1, '1671959984719', '1672282320700', 1),
-(72, 1, 2, 'sdfsdfsdfsdsdfsdf', 1, '1671959987825', '1672283315505', 1),
-(73, 1, 2, 'sdfsdfsdfsdfsdsdfsdfsdf', 1, '1671959993611', '1672283315505', 1),
-(74, 2, 1, 'sdfsfsdsdffsdfsdf', 1, '1671959998938', '1672282320700', 1),
-(75, 1, 2, 'sdfsdf', 1, '1671960002045', '1672283315505', 1),
-(76, 1, 2, 'sdfsdsdfdf', 1, '1671960006169', '1672283315505', 1),
-(77, 2, 1, 'dsfdf', 1, '1671960267442', '1672282320700', 1),
-(78, 1, 2, 'sdf', 1, '1671960269364', '1672283315505', 1),
-(79, 1, 2, 'sdfsdf', 1, '1671960272858', '1672283315505', 1),
-(80, 1, 2, 'sdfsdfsdf', 1, '1671960276890', '1672283315505', 1),
-(81, 1, 2, 'sdf', 1, '1671960280873', '1672283315505', 1),
-(82, 1, 2, 'sdf', 1, '1671960286963', '1672283315505', 1),
-(83, 2, 1, 'dsfdfsdf', 1, '1671960291187', '1672282320700', 1),
-(84, 1, 2, 'sdfsdf', 1, '1671960293563', '1672283315505', 1),
-(85, 2, 1, 'dsfdfsdfsdf', 1, '1671960295080', '1672282320700', 1),
-(86, 2, 1, 'dsfdfsdfsdf', 1, '1671960295944', '1672282320700', 1),
-(87, 2, 1, 'sdfsf', 1, '1671960338058', '1672282320700', 1),
-(88, 1, 2, 'sdf', 1, '1671960340412', '1672283315505', 1),
-(89, 2, 13, 'sdfsf', 0, '1671960343153', NULL, 1),
-(90, 1, 2, 'sdf', 1, '1671960345786', '1672283315505', 1),
-(91, 1, 2, 'sdf', 1, '1671960350770', '1672283315505', 1),
-(92, 1, 2, 'sdf', 1, '1671960358061', '1672283315505', 1),
-(93, 1, 2, 'dfsdfsf', 1, '1671961296209', '1672283315505', 1),
-(94, 1, 2, 'gfhfgh', 1, '1671961521941', '1672283315505', 1),
-(95, 1, 2, 'gfhfgh', 1, '1671961523954', '1672283315505', 1),
-(96, 1, 2, 'dfkjdf', 1, '1671961676436', '1672283315505', 1),
-(97, 1, 2, 'jdfkjdsf', 1, '1671961681123', '1672283315505', 1),
-(98, 1, 2, 'hgfhfg', 1, '1671961868170', '1672283315505', 1),
-(99, 1, 2, 'ffghfg', 1, '1671961871288', '1672283315505', 1),
-(100, 1, 2, 'fgcbvc', 1, '1671961875186', '1672283315505', 1),
-(101, 1, 2, 'jkghg', 1, '1671961877896', '1672283315505', 1),
-(102, 1, 2, 'sfsdf', 1, '1671961910234', '1672283315505', 1),
-(103, 1, 2, 'khghgj', 1, '1671961913256', '1672283315505', 1),
-(104, 2, 1, 'iuiuhiu', 1, '1671961917328', '1672282320700', 1),
-(105, 2, 1, 'kjj', 1, '1671961920558', '1672282320700', 1),
-(106, 2, 1, 'jhgj', 1, '1671961924823', '1672282320700', 1),
-(107, 1, 2, 'utytujyj', 1, '1671961955377', '1672283315505', 1),
-(108, 1, 2, 'ghjgh', 1, '1671961957464', '1672283315505', 1),
-(109, 1, 4, 'hg', 1, '1671962390014', '1672287431827', 1),
-(110, 1, 2, 'hello', 1, '1672283333902', '1672284758876', 1),
-(111, 1, 2, 'hiii', 1, '1672283337401', '1672284758876', 1),
-(112, 2, 1, 'dfgdf', 1, '1672283729201', '1672283736905', 1),
-(113, 2, 1, 'dfgdf', 1, '1672283731401', '1672283736905', 1),
-(114, 2, 1, 'asfasfa', 1, '1672283745849', '1672284802618', 1),
-(115, 2, 1, 'asdasdasd', 1, '1672283747750', '1672284802618', 1),
-(116, 2, 1, 'asdas', 1, '1672283749742', '1672284802618', 1),
-(117, 1, 2, 'dsgfgfd', 1, '1672284805211', '1672285341756', 1),
-(118, 1, 2, 'dfgdfg', 1, '1672284806769', '1672285341756', 1),
-(119, 1, 2, 'dfgfd', 1, '1672284808463', '1672285341756', 1),
-(120, 1, 2, 'dsfgsdfg', 1, '1672285528533', '1672285538619', 1),
-(121, 1, 2, 'ffffffffffff', 1, '1672285530683', '1672285538619', 1),
-(122, 1, 2, 'gggggggggg', 1, '1672285533064', '1672285538619', 1),
-(123, 1, 2, 'dsfdsf', 1, '1672285839333', '1672285848868', 1),
-(124, 1, 2, 'sdfdsf', 1, '1672285840811', '1672285848868', 1),
-(125, 1, 2, 'fdsf', 1, '1672285842498', '1672285848868', 1),
-(126, 1, 2, 'dfgdfg', 1, '1672285931596', '1672286141703', 1),
-(127, 1, 2, 'dfgfd', 1, '1672285933033', '1672286141703', 1),
-(128, 1, 2, 'sdfsdf', 1, '1672286176484', '1672286185161', 1),
-(129, 1, 2, 'sdfds', 1, '1672286177746', '1672286185161', 1),
-(130, 1, 2, 'dsfds', 1, '1672286178970', '1672286185161', 1),
-(131, 1, 2, 'dsfsdf', 1, '1672286859580', '1672286893603', 1),
-(132, 1, 2, 'hgfh', 1, '1672286931973', '1672286943711', 1),
-(133, 1, 2, 'dfdsf', 1, '1672287044194', '1672287399393', 1),
-(134, 1, 2, 'sdfsd', 1, '1672287045598', '1672287399393', 1),
-(135, 1, 2, 'sdfsd', 1, '1672287047133', '1672287399393', 1),
-(136, 1, 14, 'hiiii', 1, '1672287316754', '1672287351008', 1),
-(137, 1, 14, 'sdfsd', 1, '1672287318437', '1672287351008', 1),
-(138, 14, 1, 'dsfsdf', 1, '1672287374329', '1672287525873', 1),
-(139, 14, 1, 'sdfsdf', 1, '1672287376804', '1672287525873', 1),
-(140, 14, 1, 'sdfsdf', 1, '1672287378517', '1672287525873', 1),
-(141, 2, 1, 'fdsfsd', 1, '1672287401961', '1672287502687', 1),
-(142, 4, 1, 'sdfsdf', 0, '1672287433812', NULL, 1),
-(143, 4, 1, 'sdfsd', 0, '1672287435560', NULL, 1),
-(144, 4, 1, 'sdfsdf', 0, '1672287436832', NULL, 1),
-(145, 4, 1, 'sdfsd', 0, '1672287437969', NULL, 1);
+(1, 1, 2, 'hii', 1, '1671682995073', '1672293269825', 1),
+(2, 2, 1, 'hello', 1, '1671683052661', '1672463901915', 1),
+(3, 1, 2, 'What is Lorem Ipsum?', 1, '1671683139506', '1672293269825', 1),
+(4, 2, 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unk', 1, '1671683156087', '1672463901915', 1),
+(5, 1, 2, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s sta', 1, '1671683172384', '1672293269825', 1),
+(6, 2, 1, 'Lorem Ipsum is simply dummy text of the printing and ty', 1, '1671683182110', '1672463901915', 1),
+(7, 2, 1, 'Lorem Ipsum is simply dummy text of the printing and ty', 1, '1671683182411', '1672463901915', 1),
+(8, 1, 2, 'Lorem Ipsum is simply dummy text of the printing and typ', 1, '1671683193213', '1672293269825', 1),
+(9, 1, 2, 'Lorem Ipsum is simply dummy text of the printing and typ', 1, '1671683193810', '1672293269825', 1),
+(10, 1, 2, 'Lorem Ipsum is simply dummy text of the printing and typ', 1, '1671683194083', '1672293269825', 1),
+(11, 1, 2, 'Lorem Ipsum is simply dummy text of the printing and typ', 1, '1671683194465', '1672293269825', 1),
+(12, 1, 2, 'HIII', 1, '1671683210781', '1672293269825', 1),
+(13, 1, 4, 'hii', 0, '1671689360236', NULL, 1),
+(14, 2, 1, 'hello', 1, '1671857102573', '1672463901915', 1),
+(15, 2, 1, 'helloii', 1, '1671857107573', '1672463901915', 1),
+(16, 1, 2, 'hii', 1, '1671857110913', '1672293269825', 1),
+(17, 2, 1, 'helloii', 1, '1671857114054', '1672463901915', 1),
+(18, 1, 2, 'hii', 1, '1672030147393', '1672293269825', 1),
+(19, 1, 2, 'frgre', 1, '1672463904973', '1672463906880', 1),
+(20, 2, 1, 'err', 1, '1672463908906', '1672463909019', 1),
+(21, 1, 2, 'er', 1, '1672463911318', '1672463911444', 1),
+(22, 1, 2, 'hii', 1, '1673086160835', '1673086186983', 1),
+(23, 15, 1, 'hii', 1, '1673674772249', '1673674848117', 1),
+(24, 15, 1, 'hii', 1, '1673674833988', '1673674848117', 1),
+(25, 1, 15, 'helllo', 1, '1673674862298', '1673674862507', 1),
+(26, 15, 1, 'hii', 1, '1673674902086', '1673674938607', 1),
+(27, 15, 1, 'fhf', 1, '1673674907219', '1673674938607', 1),
+(28, 15, 1, 'gdf', 1, '1673674910237', '1673674938607', 1),
+(29, 15, 1, 'gfd', 1, '1673674942862', '1673674942993', 1),
+(30, 15, 1, 'fvvv', 1, '1673674945659', '1673674945769', 1),
+(31, 1, 15, 'vvv', 1, '1673674952108', '1673674952245', 1),
+(32, 1, 2, 'frgre', 1, '1673675263573', '1673690485167', 1),
+(33, 15, 1, 'http://localhost:3000/postdetail/16', 1, '1673680871490', '1673689989773', 1),
+(34, 15, 1, 'hii', 1, '1673689985079', '1673689989773', 1),
+(35, 1, 15, 'hii', 1, '1673689992970', '1673689993138', 1),
+(36, 15, 1, 'vbvc', 1, '1673689998220', '1673689998352', 1),
+(37, 1, 15, 'fdvfd', 1, '1673690002285', '1673838746118', 1),
+(38, 1, 15, 'fdd', 1, '1673690004190', '1673838746118', 1),
+(39, 15, 19, 'hii', 1, '1673838604598', '1673838751965', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notifications`
+--
+
+CREATE TABLE `notifications` (
+  `id` int(11) NOT NULL,
+  `userId` int(10) DEFAULT NULL,
+  `notifyuserId` int(10) DEFAULT NULL,
+  `isRead` int(10) NOT NULL DEFAULT 0,
+  `text` varchar(512) DEFAULT NULL,
+  `createdDate` varchar(512) DEFAULT NULL,
+  `updatedDate` varchar(512) DEFAULT NULL,
+  `is_active` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `notifications`
+--
+
+INSERT INTO `notifications` (`id`, `userId`, `notifyuserId`, `isRead`, `text`, `createdDate`, `updatedDate`, `is_active`) VALUES
+(1, 2, 15, 1, 'Ashok shrma comment on your post.', '1673694900753', '1673696091039', 1),
+(2, 2, 15, 1, 'Ashok shrma like your post.', '1673695113201', '1673696091039', 1),
+(3, 2, 15, 1, 'Ashok shrma like your post.', '1673695116888', '1673696091039', 1),
+(4, 2, 15, 1, 'Ashok shrma comment on your post.', '1673695124398', '1673696091039', 1),
+(5, 2, 15, 1, 'Ashok shrma comment on your post.', '1673695360535', '1673696091039', 1),
+(6, 2, 15, 1, 'Ashok shrma comment on your post', '1673695655837', '1673696091039', 1),
+(7, 2, 15, 1, 'Ashok shrma comment on your post.', '1673695721750', '1673696091039', 1),
+(8, 2, 15, 1, 'Comment on your post.', '1673695842085', '1673696091039', 1),
+(9, 2, 15, 1, 'Comment on your post.', '1673695845030', '1673696091039', 1),
+(10, 2, 15, 1, 'Like your post.', '1673696146196', '1673696164538', 1),
+(11, 2, 15, 1, 'Comment on your post.', '1673696156848', '1673696164538', 1),
+(12, 15, 17, 1, 'New friend request.', '1673696509882', '1673696624118', 1),
+(13, 15, 17, 1, 'Like your post.', '1673696661777', '1673696664370', 1),
+(14, 15, 17, 1, 'Comment on your post.', '1673696678386', '1673696682196', 1),
+(15, 15, 18, 1, 'New friend request.', '1673696935998', '1673696945398', 1),
+(16, 18, 15, 1, 'Your friend request accepted.', '1673697722731', '1673697734954', 1),
+(17, 15, 19, 1, 'New friend request.', '1673697951329', '1673697958366', 1),
+(18, 19, 15, 1, 'Your friend request accepted.', '1673697967227', '1673697970001', 1),
+(19, 15, 19, 1, 'Like your post.', '1673697987255', '1673697989361', 1),
+(20, 15, 19, 1, 'Comment on your post.', '1673698025460', '1673698037521', 1),
+(21, 15, 19, 1, 'Like your post.', '1673836850296', '1673843817925', 1),
+(22, 15, 19, 1, 'Like your post.', '1673836853174', '1673843817925', 1),
+(23, 15, 19, 1, 'Like your post.', '1673842843479', '1673843817925', 1),
+(24, 15, 19, 1, 'Like your post.', '1673843436218', '1673843817925', 1),
+(25, 15, 19, 1, 'Like your post.', '1673843442233', '1673843817925', 1),
+(26, 15, 19, 1, 'Like your post.', '1673843654681', '1673843817925', 1),
+(27, 15, 19, 1, 'Like your post.', '1673843662524', '1673843817925', 1),
+(28, 15, 19, 1, 'Like your post.', '1673843665872', '1673843817925', 1),
+(29, 15, 19, 1, 'Like your post.', '1673843725001', '1673843817925', 1),
+(30, 15, 20, 1, 'New friend request.', '1673844323346', '1673844328309', 1),
+(31, 20, 15, 1, 'Your friend request accepted.', '1673844338807', '1673844343305', 1),
+(32, 15, 20, 1, 'Like your post.', '1673844353164', '1673844368037', 1),
+(33, 15, 20, 1, 'Comment on your post.', '1673844360523', '1673844368037', 1),
+(34, 15, 20, 1, 'Comment on your post.', '1673844365705', '1673844368037', 1),
+(35, 15, 20, 1, 'Comment on your post.', '1673844615871', '1673844621365', 1),
+(36, 15, 20, 1, 'Comment on your post.', '1673844629989', '1673844635580', 1),
+(37, 1, 21, 0, 'New friend request.', '1674096422555', NULL, 1),
+(38, 2, 21, 0, 'New friend request.', '1674096423251', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -245,7 +222,14 @@ INSERT INTO `posts` (`id`, `userId`, `postTitle`, `image`, `description`, `creat
 (10, 2, 'Akki\'s first post', '', 'ers, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsu u are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a ', '1671870271293', NULL, 1),
 (11, 2, 'Akki\'s second post', '1671870406529.jpg', '-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and', '1671870406543', NULL, 1),
 (12, 14, 'Why do we use it?', '', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use ', '1671883686724', NULL, 1),
-(13, 14, 'Where does it come from?', '1671883753711.jpg', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has surviv', '1671883753714', NULL, 1);
+(13, 14, 'Where does it come from?', '1671883753711.jpg', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has surviv', '1671883753714', NULL, 1),
+(14, 1, 'Test ', '', 'AAA', '1673074989985', NULL, 1),
+(15, 15, 'Ashok post', '', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy.', '1673674204429', NULL, 1),
+(16, 15, 'Ashok post -2 ', '1673674290935.jpg', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy.', '1673674290942', NULL, 1),
+(17, 16, 'Arya post 1', '', 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is a', '1673678864034', NULL, 1),
+(18, 2, 'New Akki\'s Post ', '', 'test test test', '1673696133805', NULL, 1),
+(19, 21, 'userAA first Post', '', 'test', '1673845797479', NULL, 1),
+(20, 22, 'userBB first post', '', 'test', '1674097217711', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -268,8 +252,62 @@ CREATE TABLE `posts_comments` (
 --
 
 INSERT INTO `posts_comments` (`id`, `postId`, `commentUserId`, `commet`, `createdDate`, `updatedDate`, `is_active`) VALUES
-(1, 1, 1, 'test comment 1', NULL, NULL, 1),
-(2, 1, 1, 'test comment 2', NULL, NULL, 1);
+(1, 12, 2, 'akshay', '1672381256325', NULL, 1),
+(2, 13, 2, 'akshay ', '1672381282428', NULL, 1),
+(3, 13, 2, 'eeeee', '1672381346062', NULL, 1),
+(4, 13, 2, 'www', '1672381688981', NULL, 1),
+(5, 13, 2, 'wwww', '1672381916409', NULL, 1),
+(6, 13, 2, 'ssss', '1672382067851', NULL, 1),
+(7, 13, 2, 'ssssasddss', '1672382076947', NULL, 1),
+(8, 13, 2, 'sadad', '1672382145556', NULL, 1),
+(9, 13, 2, 'fgdhf', '1672412380574', NULL, 1),
+(10, 11, 1, 'jhvhj', '1672487913357', NULL, 1),
+(11, 13, 1, 'shrushti\'s comment on this post', '1672488710365', NULL, 1),
+(12, 12, 1, 'dssgfd', '1672488958517', NULL, 1),
+(13, 13, 1, 'ffff', '1672488981639', NULL, 1),
+(14, 13, 1, 'rtbhg', '1672489093538', NULL, 1),
+(15, 13, 1, 'fghf', '1672489565041', NULL, 1),
+(16, 13, 1, 'dfff', '1672489685395', NULL, 1),
+(17, 13, 1, 'fffffffffffff', '1672489690801', NULL, 1),
+(18, 13, 1, 'fdferf', '1672489694216', NULL, 1),
+(19, 13, 1, 'fdd', '1672489699402', NULL, 1),
+(20, 13, 1, 'akki', '1672489704207', NULL, 1),
+(21, 13, 1, 'abc', '1672489708684', NULL, 1),
+(22, 13, 1, 'cedcf', '1672489752332', NULL, 1),
+(23, 13, 1, 'dsfds', '1672489956309', NULL, 1),
+(24, 13, 1, 'dsgfds', '1672490314981', NULL, 1),
+(25, 13, 1, 'ffffffffffffffffffg', '1672490321764', NULL, 1),
+(26, 13, 1, 'nnnnnnnn', '1672490326993', NULL, 1),
+(27, 13, 1, 'eeeee', '1672490334634', NULL, 1),
+(28, 13, 1, 'hiii', '1672490602070', NULL, 1),
+(29, 13, 1, 'hitere', '1672490605953', NULL, 1),
+(30, 6, 1, 'Hello sir', '1672492580209', NULL, 1),
+(31, 13, 1, 'sesdffdg', '1672986214231', NULL, 1),
+(32, 13, 1, 'kkkk', '1672986222727', NULL, 1),
+(33, 14, 1, 'test', '1673077691897', NULL, 1),
+(34, 14, 1, 'test 2', '1673077699279', NULL, 1),
+(35, 14, 2, 'test 3', '1673077718992', NULL, 1),
+(36, 14, 1, 'test 4', '1673077744614', NULL, 1),
+(37, 14, 1, 'ty', '1673077936945', NULL, 1),
+(38, 14, 1, 'fd', '1673078047210', NULL, 1),
+(39, 14, 15, 'test comment', '1673673728631', NULL, 1),
+(40, 16, 15, 'post comment -1', '1673674373985', NULL, 1),
+(41, 16, 1, 'testA', '1673694108508', NULL, 1),
+(42, 16, 1, 'test AA', '1673694132456', NULL, 1),
+(43, 11, 15, 'test AAA', '1673694900753', NULL, 1),
+(44, 10, 15, 'test bbb', '1673695124398', NULL, 1),
+(45, 11, 15, 'test AAA', '1673695360535', NULL, 1),
+(46, 10, 15, 'hiii', '1673695655837', NULL, 1),
+(47, 10, 15, 'hello', '1673695721750', NULL, 1),
+(48, 10, 15, 'hello', '1673695842085', NULL, 1),
+(49, 10, 15, 'hii', '1673695845030', NULL, 1),
+(50, 18, 15, 'test A', '1673696156848', NULL, 1),
+(51, 16, 17, 'hii', '1673696678386', NULL, 1),
+(52, 15, 19, 'hii', '1673698025460', NULL, 1),
+(53, 16, 20, 'test', '1673844360523', NULL, 1),
+(54, 16, 20, 'hello', '1673844365705', NULL, 1),
+(55, 15, 20, 'hii', '1673844615871', NULL, 1),
+(56, 15, 20, 'gfhfgh', '1673844629989', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -292,13 +330,30 @@ CREATE TABLE `posts_likes` (
 --
 
 INSERT INTO `posts_likes` (`id`, `postId`, `likeUserId`, `isLike`, `createdDate`, `updatedDate`, `is_active`) VALUES
-(1, 11, 1, 1, '1671880783730', '1671880953487', 1),
-(2, 7, 1, 0, '1671881259779', '1672028007955', 1),
-(3, 10, 1, 1, '1671881269418', NULL, 1),
-(4, 6, 1, 1, '1672027949838', '1672281692894', 1),
-(5, 5, 1, 0, '1672027955917', '1672027956860', 1),
-(6, 4, 1, 1, '1672027987949', '1672027989227', 1),
-(7, 3, 1, 0, '1672027995900', '1672027997787', 1);
+(6, 13, 2, 0, '1672233445355', '1672305059175', 1),
+(7, 13, 1, 1, '1672233455562', '1673077857697', 1),
+(8, 12, 2, 1, '1672233586291', '1672382286363', 1),
+(9, 12, 1, 1, '1672233597977', '1673078245996', 1),
+(10, 11, 2, 1, '1672233657146', NULL, 1),
+(11, 11, 1, 1, '1672233666898', NULL, 1),
+(12, 10, 1, 1, '1672233728611', NULL, 1),
+(13, 10, 2, 1, '1672293297092', '1672293299301', 1),
+(14, 14, 1, 1, '1673077673477', '1673670417977', 1),
+(15, 14, 15, 0, '1673673704716', '1673673794866', 1),
+(16, 15, 15, 1, '1673674215142', '1673674339683', 1),
+(17, 16, 15, 1, '1673679026359', NULL, 1),
+(18, 17, 2, 1, '1673693609205', NULL, 1),
+(19, 16, 1, 1, '1673693707887', '1673693859913', 1),
+(20, 15, 1, 1, '1673693753891', NULL, 1),
+(21, 6, 1, 1, '1673693771320', NULL, 1),
+(22, 7, 1, 1, '1673693868337', NULL, 1),
+(23, 10, 15, 1, '1673695113201', NULL, 1),
+(24, 11, 15, 1, '1673695116888', NULL, 1),
+(25, 18, 15, 1, '1673696146196', NULL, 1),
+(26, 16, 17, 1, '1673696661777', NULL, 1),
+(27, 15, 19, 1, '1673697987255', NULL, 1),
+(28, 16, 19, 1, '1673836850296', '1673843725001', 1),
+(29, 16, 20, 1, '1673844353164', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -349,6 +404,7 @@ CREATE TABLE `users` (
   `achievement` text DEFAULT NULL,
   `yearOfExperience` int(10) DEFAULT NULL,
   `workedProjects` text DEFAULT NULL,
+  `workedCompanies` text DEFAULT NULL,
   `createdDate` varchar(512) DEFAULT NULL,
   `updatedDate` varchar(512) DEFAULT NULL,
   `is_active` int(11) NOT NULL DEFAULT 1
@@ -358,18 +414,26 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `photo`, `coverimage`, `dateOfBirth`, `collageId`, `passoutYear`, `about`, `technicalKnowledge`, `achievement`, `yearOfExperience`, `workedProjects`, `createdDate`, `updatedDate`, `is_active`) VALUES
-(1, 'sharushti mane', 'user1@gmail.com', '12341234', '', NULL, '0000-00-00', 1, 2022, 'My Aboutus bgbtgb', 'Software Devloper mmmmmmmmm', 'Happy', 3, 'E-comerce', 'string', '1671868002230', 1),
-(2, 'Akki', 'user2@gmail.com', '12341234', '', NULL, '0000-00-00', 2, 2022, '0', 'akki tech', '0', 0, 'Worked Projects', '1670672409202', '1671870048165', 1),
-(3, 'snehal', 'user3@gmail.com', '12341234', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1670672432716', NULL, 1),
-(4, 'akansha', 'akansharahul@gmail.com', '12341234', NULL, NULL, NULL, 2, NULL, NULL, 'akshan tech', NULL, NULL, NULL, '1670672449557', NULL, 1),
-(5, 'gayatri', 'user5@gmail.com', '12341234', 'abc.png', NULL, '2022-12-07', 1, 2020, 'about data', 'technicalKnowledge data', 'achievement data', 2, 'workedProjects data', '1670812936192', '1670816122777', 1),
-(6, 'rahul', 'user6@gmail.com', '12341234', NULL, NULL, NULL, 1, 2022, NULL, NULL, NULL, NULL, NULL, '1670814611727', NULL, 1),
-(10, 'Akki Haatkar', 'akk2@gmail.com', '123', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1671111023076', NULL, 1),
-(11, 'Amir  hode', 'amir111@gmail.com', '1111', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1671167397408', NULL, 1),
-(12, 'rehan maniyar', 'rehan333@gmail.com', '333', NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL, NULL, NULL, '1671167706580', NULL, 1),
-(13, 'Ajay Rane', 'ajayrane@gmail.com', '12341234', '', NULL, '0000-00-00', 2, 2022, 'demo', 'sofetware developer', 'demo 1', 1, 'social app', '1671881818475', '1671882155773', 1),
-(14, 'Arjun Mohite', 'arjunmohithe@gmail.com', '12341234', '', NULL, '0000-00-00', 1, 2022, 'skills', 'react', 'dem', 3, 'demo', '1671883220411', '1671883578808', 1);
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `photo`, `coverimage`, `dateOfBirth`, `collageId`, `passoutYear`, `about`, `technicalKnowledge`, `achievement`, `yearOfExperience`, `workedProjects`, `workedCompanies`, `createdDate`, `updatedDate`, `is_active`) VALUES
+(1, 'sharushti mane', 'user1@gmail.com', '12341234', '1673843741350.jpg', '1673096290738.jpg', '0000-00-00', 1, 2022, 'My Aboutus bgbtgb', 'Software Devloper mmmmmmmmm', 'Happy', 3, 'E-comerce', NULL, 'string', '1673843741353', 1),
+(2, 'Akki', 'user2@gmail.com', '12341234', '1672117946487.jpg', '1672406748180.jpg', '0000-00-00', 2, 2022, '0', 'akki tech', '0', 0, 'Worked Projects', NULL, '1670672409202', '1672406748191', 1),
+(3, 'snehal', 'user3@gmail.com', '12341234', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1670672432716', NULL, 1),
+(4, 'akansha', 'akansharahul@gmail.com', '12341234', NULL, NULL, NULL, 2, NULL, NULL, 'akshan tech', NULL, NULL, NULL, NULL, '1670672449557', NULL, 1),
+(5, 'gayatri', 'user5@gmail.com', '12341234', 'abc.png', NULL, '2022-12-07', 1, 2020, 'about data', 'technicalKnowledge data', 'achievement data', 2, 'workedProjects data', NULL, '1670812936192', '1670816122777', 1),
+(6, 'rahul', 'user6@gmail.com', '12341234', NULL, NULL, NULL, 1, 2022, NULL, NULL, NULL, NULL, NULL, NULL, '1670814611727', NULL, 1),
+(10, 'Akki Haatkar', 'akk2@gmail.com', '123', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1671111023076', NULL, 1),
+(11, 'Amir  hode', 'amir111@gmail.com', '1111', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1671167397408', NULL, 1),
+(12, 'rehan maniyar', 'rehan333@gmail.com', '333', NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1671167706580', NULL, 1),
+(13, 'Ajay Rane', 'ajayrane@gmail.com', '12341234', NULL, NULL, '0000-00-00', 2, 2022, 'demo', 'sofetware developer', 'demo 1', 1, 'social app', NULL, '1671881818475', '1671882155773', 1),
+(14, 'Arjun Mohite', 'arjunmohithe@gmail.com', '12341234', NULL, NULL, '0000-00-00', 1, 2022, 'skills', 'react', 'dem', 3, 'demo', NULL, '1671883220411', '1671883578808', 1),
+(15, 'Ashok shrma', 'ashok123@gmail.com', '12341234', NULL, '1673674053518.jpg', '0000-00-00', 2, 2016, 'demo', '  test', '  skills', 3, 'build tech', NULL, '1673673606050', '1673674053527', 1),
+(16, 'Arya patil', 'arya@gmail.com', '12341234', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1673678354473', NULL, 1),
+(17, 'Sonam', 'sonam@gmail.com', '12341234', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1673696398069', NULL, 1),
+(18, 'panu', 'panu@gmail.com', '12341234', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1673696920966', NULL, 1),
+(19, 'Soham', 'soham@gmail.com', '12341234', '1673838346503.jpg', NULL, NULL, 1, 5, 'fgh', 'dfg', 'dfg', 46, 'ertgdr', NULL, '1673697932560', '1673838346504', 1),
+(20, 'rachana', 'rachana@gmail.com', '12341234', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1673844307084', NULL, 1),
+(21, 'userAA', 'userAA@gmail.com', '12341234', NULL, NULL, NULL, 1, 2021, NULL, NULL, NULL, NULL, NULL, 'capgemini', '1673845772735', '1674183620133', 1),
+(22, 'userBB', 'userBB@gmail.com', '12341234', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1674096627241', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -398,7 +462,16 @@ INSERT INTO `user_friends` (`id`, `userId`, `friendId`, `isRequest`, `createdDat
 (5, 1, 4, 0, '1671434284976', '1671445928253', 1),
 (6, 13, 2, 0, '1671881981253', '1671881995786', 1),
 (7, 14, 2, 0, '1671883328213', '1671883356572', 1),
-(8, 14, 1, 0, '1672287155891', '1672287305743', 1);
+(8, 2, 5, 1, '1672400379810', NULL, 1),
+(9, 15, 1, 0, '1673674512375', '1673674579374', 1),
+(10, 2, 15, 0, '1673677152210', '1673677166640', 1),
+(11, 16, 2, 0, '1673678687999', '1673678782029', 1),
+(12, 17, 15, 0, '1673696509882', '1673696651003', 1),
+(13, 18, 15, 0, '1673696935998', '1673697722731', 1),
+(14, 19, 15, 0, '1673697951329', '1673697967227', 1),
+(15, 20, 15, 0, '1673844323346', '1673844338807', 1),
+(16, 21, 1, 0, '1674096422555', NULL, 1),
+(17, 21, 2, 0, '1674096423251', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -443,11 +516,26 @@ INSERT INTO `user_skills` (`id`, `userId`, `skilsId`, `createdDate`, `updatedDat
 (59, 13, 8, '1671882155806', NULL, 1),
 (60, 14, 1, '1671883578814', NULL, 1),
 (61, 14, 2, '1671883578814', NULL, 1),
-(62, 14, 3, '1671883578814', NULL, 1);
+(62, 14, 3, '1671883578814', NULL, 1),
+(65, 15, 3, '1673673969873', NULL, 1),
+(66, 15, 2, '1673673969873', NULL, 1),
+(67, 15, 4, '1673673969873', NULL, 1),
+(68, 15, 1, '1673673969873', NULL, 1),
+(73, 19, 2, '1673838230056', NULL, 1),
+(74, 19, 7, '1673838230056', NULL, 1),
+(75, 21, 2, '1674183620190', NULL, 1),
+(76, 21, 4, '1674183620190', NULL, 1),
+(77, 21, 5, '1674183620190', NULL, 1);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `block_users`
+--
+ALTER TABLE `block_users`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `colleges`
@@ -459,6 +547,12 @@ ALTER TABLE `colleges`
 -- Indexes for table `messages`
 --
 ALTER TABLE `messages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `notifications`
+--
+ALTER TABLE `notifications`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -508,6 +602,12 @@ ALTER TABLE `user_skills`
 --
 
 --
+-- AUTO_INCREMENT for table `block_users`
+--
+ALTER TABLE `block_users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `colleges`
 --
 ALTER TABLE `colleges`
@@ -517,25 +617,31 @@ ALTER TABLE `colleges`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- AUTO_INCREMENT for table `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `posts_comments`
 --
 ALTER TABLE `posts_comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `posts_likes`
 --
 ALTER TABLE `posts_likes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `skills`
@@ -547,19 +653,19 @@ ALTER TABLE `skills`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `user_friends`
 --
 ALTER TABLE `user_friends`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `user_skills`
 --
 ALTER TABLE `user_skills`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -2,18 +2,18 @@ const mysql = require('mysql2/promise');
 
 const mysqlConnection = async ({ querys, values = [] }) => {
    let connection = await mysql.createConnection({
-    host:"localhost",
-    port:"3306",
-    user:'root',
-    password:"",
-    database:"fresher_guidence_social_app"
+    // host:"localhost",
+    // port:"3306",
+    // user:'root',
+    // password:"",
+    // database:"fresher_guidence_social_app"
 
 
-       // host: 'www.remotemysql.com',
-       // user: '6br4O9SyPX',
-       // password: 'BY5gM7x7Tm',
-       // port:3306,
-       // database:"6br4O9SyPX"
+       host: 'sql11.freemysqlhosting.net',
+       user: 'sql11591893',
+       password: 'WTIfSu3Qyv',
+       port:3306,
+       database:"sql11591893"
    });
  try {
    var data;

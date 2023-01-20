@@ -158,9 +158,9 @@ app.use('/auth', authRoute);
 app.use('/notifications',middleware, notificationsRoute);
 
 
+const port = process.env.PORT || 8080;
 
-
-server.listen(8080,() => {
-    console.log("express server is running  on 8080")
+server.listen(port,() => {
+    console.log("express server is running  on "+ port)
 })
 
