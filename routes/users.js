@@ -30,7 +30,7 @@ router.get('/:id', async(req, res) => {
    output.friends = rows3
    const querySql4 = 'SELECT COUNT(id) as count FROM `notifications` WHERE userId = "'+id+'" and isRead = 0';
    const rows4 = await connection({ querys: querySql4, values: [] });
-   const checksql = "SELECT * FROM user_friends where ( userId = '"+id+"' and friendId = '"+loginuserData.id+"' ) or ( userId = '"+loginuserData.id+"' and friendId = '"+id+"' ) and isRequest = 0"
+   const checksql = "SELECT * FROM user_friends where ( userId = '"+id+"' and friendId = '"+loginuserData.id+"' and isRequest = 0) or ( userId = '"+loginuserData.id+"' and friendId = '"+id+"' and isRequest = 0) and isRequest = 0"
    const rowsCheck = await connection({ querys: checksql, values: [] });
    if(rowsCheck.length > 0 ){
       output.isFriend = true     
